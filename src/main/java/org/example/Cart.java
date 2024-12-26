@@ -27,6 +27,17 @@ public class Cart {
         return totalPrice;
     }
 
+    // Add the getTotalDiscount method
+    public double getTotalDiscount() {
+        double totalDiscount = 0;
+        for (Product product : products) {
+            if (product instanceof Discountable) {
+                totalDiscount += product.getPrice() - ((Discountable) product).applyDiscount(product.getPrice());
+            }
+        }
+        return totalDiscount;
+    }
+
     // Add the toString method
     @Override
     public String toString() {
@@ -72,5 +83,12 @@ public class Cart {
         products = newProducts;
     }
 
+    public void addDiscount(double discount) {
+        for (Product product : products) {
+            if (product instanceof Discountable) {
+                product.applyDiscount(discount);
+            }
+        }
+    }
 
 }

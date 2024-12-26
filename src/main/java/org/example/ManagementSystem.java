@@ -6,13 +6,19 @@ import java.util.Scanner;
 public class ManagementSystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         // Create a new product
         Product laptop = new Product("Laptop", 1000);
         Product mouse = new Product("Mouse", 20);
         Product keyboard = new Product("Keyboard", 50);
 
         // Create a new cart
-        Cart cart = new Cart(new Product[]{laptop, mouse, keyboard});
+        Cart cart = new Cart(new Product[]
+                {laptop, mouse, keyboard}
+        );
+
+        // Create a new customer
+        Customer customer = new Customer("John Doe", "123 Main St");
 
         // Print the cart
         System.out.println(cart);
@@ -35,6 +41,13 @@ public class ManagementSystem {
                 double price = scanner.nextDouble();
                 Product product = new Product(name, price);
                 cart.addProduct(product);
+
+                // Add discount to product
+                if (product instanceof Discountable) {
+                    System.out.println("Enter the discount: ");
+                    double discount = scanner.nextDouble();
+                    product.applyDiscount(discount);
+                }
             }
 
             // Remove product from cart
@@ -53,6 +66,7 @@ public class ManagementSystem {
             if (choice == 4) {
                 break;
             }
+
         }
 
 

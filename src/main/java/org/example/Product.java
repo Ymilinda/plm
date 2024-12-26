@@ -1,6 +1,6 @@
 package org.example;
 
-public class Product {
+public class Product implements Discountable {
 
         private String name;
         private double price;
@@ -26,4 +26,9 @@ public class Product {
             this.price = price;
         }
 
+    @Override
+    public double applyDiscount(double discount) {
+        price -= price * discount; // Applying the discount to the price directly
+        return price; // Return the updated price after discount
+    }
 }
