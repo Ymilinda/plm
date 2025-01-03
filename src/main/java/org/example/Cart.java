@@ -28,15 +28,44 @@ public class Cart {
     }
 
     // Add the getTotalDiscount method
-    public double getTotalDiscount() {
-        double totalDiscount = 0;
+//    public double getTotalDiscount() {
+//        double totalDiscount = 0;
+//        for (Product product : products) {
+//            if (product instanceof Discountable) {
+//                totalDiscount += product.getPrice() - ((Discountable) product).applyDiscount(product.getPrice());
+//            }
+//        }
+//        return totalDiscount;
+//    }
+
+    public void addProduct(Product product) {
+        Product[] newProducts = new Product[products.length + 1];
+        for (int i = 0; i < products.length; i++) {
+            newProducts[i] = products[i];
+        }
+        newProducts[products.length] = product;
+        products = newProducts;
+    }
+
+    public void removeProduct(String name) {
+        Product[] newProducts = new Product[products.length - 1];
+        int j = 0;
         for (Product product : products) {
-            if (product instanceof Discountable) {
-                totalDiscount += product.getPrice() - ((Discountable) product).applyDiscount(product.getPrice());
+            if (!product.getName().equals(name)) {
+                newProducts[j] = product;
+                j++;
             }
         }
-        return totalDiscount;
+        products = newProducts;
     }
+
+//    public void addDiscount(double discount) {
+//        for (Product product : products) {
+//            if (product instanceof Discountable) {
+//                product.applyDiscount(discount);
+//            }
+//        }
+//    }
 
     // Add the toString method
     @Override
@@ -60,35 +89,6 @@ public class Cart {
         }
         Cart cart = (Cart) obj;
         return java.util.Arrays.equals(products, cart.products);
-    }
-
-    public void addProduct(Product product) {
-        Product[] newProducts = new Product[products.length + 1];
-        for (int i = 0; i < products.length; i++) {
-            newProducts[i] = products[i];
-        }
-        newProducts[products.length] = product;
-        products = newProducts;
-    }
-
-    public void removeProduct(String name) {
-        Product[] newProducts = new Product[products.length - 1];
-        int j = 0;
-        for (Product product : products) {
-            if (!product.getName().equals(name)) {
-                newProducts[j] = product;
-                j++;
-            }
-        }
-        products = newProducts;
-    }
-
-    public void addDiscount(double discount) {
-        for (Product product : products) {
-            if (product instanceof Discountable) {
-                product.applyDiscount(discount);
-            }
-        }
     }
 
 }

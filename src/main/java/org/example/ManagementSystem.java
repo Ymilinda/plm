@@ -11,10 +11,11 @@ public class ManagementSystem {
         Product laptop = new Product("Laptop", 1000);
         Product mouse = new Product("Mouse", 20);
         Product keyboard = new Product("Keyboard", 50);
+        Product food = new FoodProduct("Apple", 10);
 
         // Create a new cart
         Cart cart = new Cart(new Product[]
-                {laptop, mouse, keyboard}
+                {laptop, mouse, keyboard, food}
         );
 
         // Create a new customer
@@ -39,15 +40,29 @@ public class ManagementSystem {
                 String name = scanner.next();
                 System.out.println("Enter the product price: ");
                 double price = scanner.nextDouble();
-                Product product = new Product(name, price);
-                cart.addProduct(product);
+                Electronics electronics = new Electronics(name, price);
+
+                FoodProduct foodProduct = new FoodProduct(name, price);
+
+                //Product product = new Product(name, price);
+                cart.addProduct(electronics);
+                cart.addProduct(foodProduct);
 
                 // Add discount to product
-                if (product instanceof Discountable) {
+                if (electronics instanceof Discountable) {
                     System.out.println("Enter the discount: ");
                     double discount = scanner.nextDouble();
-                    product.applyDiscount(discount);
+                    electronics.applyDiscount(discount);
                 }
+
+                // Add discount to product
+                if (foodProduct instanceof Discountable) {
+                    System.out.println("Enter the discount: ");
+                    double discount = scanner.nextDouble();
+                    electronics.applyDiscount(discount);
+                }
+
+
             }
 
             // Remove product from cart

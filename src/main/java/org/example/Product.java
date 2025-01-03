@@ -1,9 +1,9 @@
 package org.example;
 
-public class Product implements Discountable {
+public class Product {
 
-        private String name;
-        private double price;
+        protected String name;
+        protected double price;
 
         public Product(String name, double price) {
             this.name = name;
@@ -26,9 +26,9 @@ public class Product implements Discountable {
             this.price = price;
         }
 
-    @Override
-    public double applyDiscount(double discount) {
-        price -= price * discount; // Applying the discount to the price directly
-        return price; // Return the updated price after discount
-    }
+//    @Override
+//    public double applyDiscount(double discount) {
+//        price -= price * discount; // Applying the discount to the price directly
+//        return price; // Return the updated price after discount
+//    }
 }

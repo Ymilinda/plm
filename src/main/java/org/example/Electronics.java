@@ -6,11 +6,14 @@ public class Electronics extends Product implements Discountable {
         super(name, price);
     }
 
-    // Implement the applyDiscount method
     @Override
-    public double applyDiscount(double total) {
-        return total - (total * 0.10);
+    public double applyDiscount(double discount) {
+        // Electronics gets a 10% discount
+        //double discount = 0.1;
+        price -= price * 0.1;
+        return price;
     }
+
 
     @Override
     public String toString() {
