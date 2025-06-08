@@ -1,0 +1,141 @@
+# Functional Requirements Specification (FRS)
+
+## Project Title: AI-powered Travel Booking Web Application
+
+**Version:** 1.0
+**Date:** 2025-06-06
+**Prepared By:** Milinda
+
+---
+
+## 1. Introduction
+
+### 1.1 Purpose
+
+This document outlines the functional requirements for a web-based travel booking platform enhanced by AI. The system enables customers to specify preferences (dates, location, budget, duration, activities), and AI will suggest suitable travel plans. Upon confirmation, it will automatically book flights, hotels, and activities.
+
+### 1.2 Scope
+
+The application covers:
+
+* Preference capture using AI-powered interactions
+* AI-based itinerary and budget planning
+* Booking workflows for flights, hotels, and activities
+* Customer registration, profile, and booking management
+* Admin interfaces for managing inventory and user accounts
+
+### 1.3 Intended Audience
+
+* Product Owners
+* Development Team
+* QA Engineers
+* UX/UI Designers
+* AI/ML Engineers
+
+---
+
+## 2. System Overview
+
+This is an AI-integrated web platform that helps customers book customized travel experiences. The system leverages natural language or structured inputs to collect preferences and return smart travel suggestions.
+
+---
+
+## 3. Functional Requirements
+
+### 3.1 Customer Interaction and Preferences
+
+* **FR1:** The system shall allow customers to input preferences via form or chat interface.
+* **FR2:** The system shall validate all required preferences (location, budget, duration, dates, activity types).
+* **FR3:** The system shall process customer input using AI and recommend destinations, itineraries, and cost breakdowns.
+
+### 3.2 AI Recommendation Engine
+
+* **FR4:** The system shall invoke an AI service to generate travel plans based on customer input.
+* **FR5:** The AI engine shall return multiple destination and itinerary options ranked by match quality.
+* **FR6:** The system shall display itinerary options with visual maps, prices, and summaries.
+
+### 3.3 Booking System
+
+* **FR7:** The system shall allow customers to confirm AI-suggested plans and proceed to booking.
+* **FR8:** The system shall support flight booking via third-party flight APIs.
+* **FR9:** The system shall support hotel booking via hotel APIs.
+* **FR10:** The system shall support activity booking (e.g., tours, events) based on availability.
+
+### 3.4 User Account Management
+
+* **FR11:** The system shall support customer registration/login with email and social login options.
+* **FR12:** The system shall allow customers to view, edit, and cancel their bookings.
+* **FR13:** The system shall allow users to rate and review their experiences.
+
+### 3.5 Admin Panel
+
+* **FR14:** The system shall allow admins to manage users, destinations, and AI training data.
+* **FR15:** The system shall allow admins to view system analytics and monitor bookings.
+* **FR16:** The system shall provide tools for managing cancellation policies and pricing overrides.
+
+### 3.6 Notifications
+
+* **FR17:** The system shall send email and SMS notifications for confirmations, cancellations, and itinerary changes.
+* **FR18:** The system shall alert admins of failed bookings or unavailable inventory.
+
+---
+
+## 4. Non-Functional Requirements
+
+### 4.1 Performance
+
+* AI responses must return within 3–5 seconds.
+* Booking process must complete within 10 seconds.
+
+### 4.2 Usability
+
+* Application shall be mobile-responsive and accessible.
+* Itinerary views shall be visually rich and intuitive.
+
+### 4.3 Security
+
+* All data must be encrypted in transit and at rest.
+* GDPR compliance must be ensured.
+
+### 4.4 Availability
+
+* 99.9% uptime required.
+* Cloud-hosted with auto-scaling support.
+
+---
+
+## 5. User Roles and Permissions
+
+| Role     | Description          | Permissions                                  |
+| -------- | -------------------- | -------------------------------------------- |
+| Guest    | Anonymous visitor    | Search, view AI suggestions, register        |
+| Customer | Registered user      | Full booking workflow, manage profile        |
+| Admin    | Internal staff/admin | Manage system content, bookings, and AI logs |
+
+---
+
+## 6. External Interfaces
+
+* **AI Service:** NLP-based AI engine for processing user preferences.
+* **Flight API:** Integration with third-party airline APIs (e.g., Amadeus).
+* **Hotel API:** Integration with hotel networks (e.g., Booking.com).
+* **SMS/Email Gateway:** Notification services like Twilio/SendGrid.
+* **Payment Gateway:** Stripe/PayPal for transaction processing.
+
+---
+
+## 7. Assumptions and Constraints
+
+* AI suggestions are based on currently available public datasets and internal travel data.
+* Booking actions depend on third-party service availability.
+* Accurate input from users is essential for meaningful AI recommendations.
+
+---
+
+## 8. Appendices
+
+* Glossary: NLP, PNR, OTA, Itinerary, AI Confidence Score
+* UI Mockups (to be attached)
+* Sequence diagrams for booking workflows (to be prepared)
+
+---
