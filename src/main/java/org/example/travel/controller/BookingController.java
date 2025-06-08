@@ -19,6 +19,7 @@ public class BookingController {
     //test
 
     private final BookingService bookingService;
+    //test2
 
     // Create a booking
     @PostMapping("/create")
