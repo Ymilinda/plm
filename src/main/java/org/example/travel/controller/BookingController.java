@@ -16,6 +16,7 @@ import java.util.Optional;
 @RequestMapping("/api/bookings")
 @RequiredArgsConstructor
 public class BookingController {
+    //test
 
     private final BookingService bookingService;
 
