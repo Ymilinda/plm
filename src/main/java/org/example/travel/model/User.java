@@ -20,20 +20,6 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String name;
 
-    @Column(nullable = false)
-    private String fullName;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Booking> bookings = new HashSet<>();
-
-    public enum Role {
-        ROLE_USER,
-        ROLE_ADMIN
-    }
 }

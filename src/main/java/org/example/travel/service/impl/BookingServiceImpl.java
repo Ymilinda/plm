@@ -8,11 +8,13 @@ import org.example.travel.model.Booking;
 import org.example.travel.model.BookingItem;
 import org.example.travel.model.User;
 import org.example.travel.repository.BookingRepository;
+import org.example.travel.repository.UserRepository;
 import org.example.travel.service.BookingService;
 import org.example.travel.service.NotificationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -25,58 +27,31 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
     private final NotificationService notificationService;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
-    public Booking createBooking(User user, TravelRecommendation recommendation) {
+    public Booking createBooking(Long userId, TravelRecommendation recommendation) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setBookingDate(LocalDateTime.now());
         booking.setStatus(Booking.BookingStatus.PENDING);
         booking.setTotalPrice(recommendation.getEstimatedTotalCost());
 
-        // Create booking items for flights
-        recommendation.getItinerary().forEach(day -> {
-            if (day.getTransportation() != null) {
-                BookingItem flightItem = new BookingItem();
-                flightItem.setType(BookingItem.ItemType.FLIGHT);
-                flightItem.setBooking(booking);
-                flightItem.setDescription(String.format("Flight from %s to %s",
-                    day.getTransportation().getFrom(),
-                    day.getTransportation().getTo()));
-                flightItem.setPrice(day.getTransportation().getEstimatedCost());
-                flightItem.setStatus(BookingItem.ItemStatus.PENDING);
-                booking.getItems().add(flightItem);
-            }
-
-            // Create booking items for accommodation
-            if (day.getAccommodation() != null) {
-                BookingItem hotelItem = new BookingItem();
-                hotelItem.setType(BookingItem.ItemType.HOTEL);
-                hotelItem.setBooking(booking);
-                hotelItem.setDescription(day.getAccommodation().getName());
-                hotelItem.setPrice(day.getAccommodation().getPricePerNight());
-                hotelItem.setStatus(BookingItem.ItemStatus.PENDING);
-                booking.getItems().add(hotelItem);
-            }
-
-            // Create booking items for activities
-            day.getActivities().stream()
-                .filter(activity -> activity.isRequiresBooking())
-                .forEach(activity -> {
-                    BookingItem activityItem = new BookingItem();
-                    activityItem.setType(BookingItem.ItemType.ACTIVITY);
-                    activityItem.setBooking(booking);
-                    activityItem.setDescription(activity.getName());
-                    activityItem.setPrice(activity.getEstimatedCost());
-                    activityItem.setStatus(BookingItem.ItemStatus.PENDING);
-                    booking.getItems().add(activityItem);
-                });
-        });
-
-        Booking savedBooking = bookingRepository.save(booking);
-        notificationService.sendBookingCreatedNotification(savedBooking);
-        return savedBooking;
+        try {
+            System.out.println("Items: ");
+            booking.getItems().forEach(item -> {
+                System.out.println("Type: " + item.getType() + ", Price: " + item.getPrice());
+            });
+            Booking savedBooking = bookingRepository.save(booking);
+            //notificationService.sendBookingCreatedNotification(savedBooking);
+            return savedBooking;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override

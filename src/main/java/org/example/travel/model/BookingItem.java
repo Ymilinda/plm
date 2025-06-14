@@ -31,9 +31,10 @@ public class BookingItem {
     private String description;
 
     private LocalDateTime startDateTime;
+
     private LocalDateTime endDateTime;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)

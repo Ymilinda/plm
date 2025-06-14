@@ -87,9 +87,9 @@ public class OpenAIRecommendationService implements AIRecommendationService {
         score += activityMatchScore * 0.3;
 
         // Location match (20% weight)
-        if (recommendation.getDestination().equalsIgnoreCase(preference.getDestination())) {
-            score += 0.2;
-        }
+//        if (recommendation.getDestination().equalsIgnoreCase(preference.getDestination())) {
+//            score += 0.2;
+//        }
 
         return Math.min(1.0, Math.max(0.0, score));
     }

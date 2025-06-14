@@ -10,11 +10,11 @@ import java.util.Optional;
 public interface BookingService {
     /**
      * Create a new booking based on a selected travel recommendation
-     * @param user The user making the booking
+     * @param userId The user making the booking
      * @param recommendation The selected travel recommendation
      * @return The created booking
      */
-    Booking createBooking(User user, TravelRecommendation recommendation);
+    Booking createBooking(Long userId, TravelRecommendation recommendation);
 
     /**
      * Confirm a booking by processing all its items (flights, hotels, activities)
